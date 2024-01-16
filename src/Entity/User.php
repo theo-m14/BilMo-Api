@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
@@ -15,6 +16,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 #[GetCollection]
 #[Get()]
 #[Post()]
+#[Delete()]
 class User
 {
     #[ORM\Id]

@@ -61,6 +61,19 @@ class UserTest extends ApiTestCase
         ]);
     }
 
+    public function testDeleteUser(): void
+    {
+        $this->testUserGetAll();
+        $first_user = array_shift($this->users);
+
+        $response = static::createClient()->request('DELETE', '/api/users/' . $first_user['id'], ['auth_bearer' => $this->jwtToken]);
+
+        $this->assertResponseStatusCodeSame(204);
+        $this->assertNull(
+            static::getContainer()->get('doctrine')->getRepository(User::class)->findOneBy(['id' => $first_user['id']])
+        );
+    }
+
     public function testCreateUser() : void
     {   
         $this->jwtToken = self::userLoggedIn();
