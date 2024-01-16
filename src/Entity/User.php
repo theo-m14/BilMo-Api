@@ -5,11 +5,13 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ApiResource]
 #[GetCollection]
+#[Get()]
 class User
 {
     #[ORM\Id]

@@ -41,4 +41,23 @@ class UserTest extends ApiTestCase
 
         $this->users = $response->toArray()['hydra:member'];
     }
+
+    public function testProductGetOne(): void
+    {
+        $this->testUserGetAll();
+        $first_user = array_shift($this->users);
+
+        $response = static::createClient()->request('GET', '/api/users/' . $first_user['id'], ['auth_bearer' => $this->jwtToken]);
+        $this->assertResponseIsSuccessful();
+        $this->assertJsonContains([
+            "@context" => "/api/contexts/User",
+            "@id" => "/api/users/" . $first_user['id'],
+            "@type" => "User",
+            'id' => $first_user['id'],
+            'last_name' => $first_user['last_name'],
+            'first_name' => $first_user['first_name'],
+            'email' => $first_user['email'],
+            'password' => $first_user['password']
+        ]);
+    }
 }
