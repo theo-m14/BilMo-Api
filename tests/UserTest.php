@@ -60,4 +60,43 @@ class UserTest extends ApiTestCase
             'password' => $first_user['password']
         ]);
     }
+
+    public function testCreateUser() : void
+    {   
+        $this->jwtToken = self::userLoggedIn();
+
+        $password = password_hash('testpassword', PASSWORD_DEFAULT);
+        
+        $response = static::createClient()->request('POST', '/api/users', ['json' => [
+            'email' => 'test@email.com',
+            'last_name' => 'Clinton',
+            'first_name' => 'Margaret',
+            'password' => $password,
+        ],'auth_bearer' => $this->jwtToken,'headers' => ['content-type' => 'application/ld+json']]);
+
+        $this->assertResponseStatusCodeSame(201);
+        $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
+        $this->assertJsonContains([
+            '@context' => '/api/contexts/User',
+            '@type' => 'User',
+            'email' => 'test@email.com',
+            'last_name' => 'Clinton',
+            'first_name' => 'Margaret',
+            'password' => $password
+        ]);
+        $this->assertMatchesRegularExpression('~^/api/users/\d+$~', $response->toArray()['@id']);
+        $this->assertMatchesResourceItemJsonSchema(User::class);
+    }
+
+    public function testCreateInvalidUser(): void
+    {
+        $this->jwtToken = self::userLoggedIn();
+
+        $response = static::createClient()->request('POST', '/api/users', ['json' => [],'auth_bearer' => $this->jwtToken,'headers' => ['content-type' => 'application/ld+json']]);
+
+        $this->assertJsonContains([
+            'hydra:title' => 'An error occurred',
+        ]);
+    }
+    
 }

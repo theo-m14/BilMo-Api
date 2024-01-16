@@ -7,11 +7,14 @@ use App\Repository\UserRepository;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Post;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ApiResource]
 #[GetCollection]
 #[Get()]
+#[Post()]
 class User
 {
     #[ORM\Id]
@@ -20,15 +23,19 @@ class User
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[NotBlank()]
     private ?string $first_name = null;
 
     #[ORM\Column(length: 255)]
+    #[NotBlank()]
     private ?string $last_name = null;
 
     #[ORM\Column(length: 255)]
+    #[NotBlank()]
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
+    #[NotBlank()]
     private ?string $password = null;
 
     public function getId(): ?int
