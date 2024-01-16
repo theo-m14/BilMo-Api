@@ -1,0 +1,107 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "Hello API Platform",
+        "description": "",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "/",
+            "description": ""
+        }
+    ],
+    "paths": {
+        "/api/login_check": {
+            "post": {
+                "operationId": "login_check_post",
+                "tags": [
+                    "Login Check"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User token created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "token": {
+                                            "readOnly": true,
+                                            "type": "string",
+                                            "nullable": false
+                                        }
+                                    },
+                                    "required": [
+                                        "token"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "summary": "Creates a user token.",
+                "description": "Creates a user token.",
+                "requestBody": {
+                    "description": "The login data",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "nullable": false
+                                    },
+                                    "security": {
+                                        "type": "object",
+                                        "properties": {
+                                            "credentials": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "password": {
+                                                        "type": "string",
+                                                        "nullable": false
+                                                    }
+                                                },
+                                                "required": [
+                                                    "password"
+                                                ]
+                                            }
+                                        },
+                                        "required": [
+                                            "credentials"
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "email",
+                                    "security"
+                                ]
+                            }
+                        }
+                    },
+                    "required": true
+                }
+            },
+            "parameters": []
+        }
+    },
+    "components": {
+        "schemas": {},
+        "responses": {},
+        "parameters": {},
+        "examples": {},
+        "requestBodies": {},
+        "headers": {},
+        "securitySchemes": {
+            "JWT": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    },
+    "security": [],
+    "tags": []
+}
