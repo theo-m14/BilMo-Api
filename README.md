@@ -75,8 +75,9 @@ To get started with Bilmo-Api, follow these simple steps:
 10. **Access Url Endpoint:**
 
     Open [http://127.0.0.1:8000/api](http://127.0.0.1:8000/api) in your Api Client Software( like Insomnia or Postman )
+    Postman collection available in postman folder.
 
-11. **Api Documentation**
+12. **Api Documentation**
 
     Check the Api Documentation at [https://drive.google.com/file](https://drive.google.com/file/d/1PwEny3CZpasvWZ2D5vMKfA6SB9ktfl1t/view?usp=sharing)
     If u have load default fixtures, default Company log is : user0@example.com / password
