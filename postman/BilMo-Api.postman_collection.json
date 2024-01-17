@@ -1,0 +1,178 @@
+{
+	"info": {
+		"_postman_id": "c796c4f7-81c9-49f4-bfa0-035e98dddf45",
+		"name": "BilMo-Api",
+		"description": "All Application Endpoint Need Jwt Autorization.\n\nFollow the login endpoint and copy the token in Autorization Bearer headers of others request.\n\nPay Attention to id send on GetOne and Delete endpoint, the Entity requested should exist",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31207733"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "Login_Check",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"user0@example.com\",\r\n    \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{bilmoUrl}}/login_check",
+							"host": [
+								"{{bilmoUrl}}"
+							],
+							"path": [
+								"login_check"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "GetAll",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "GetOne",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "GetAll",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "GetOne",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MDU0OTI2ODIsImV4cCI6MTcwNTQ5NjI4Miwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoidXNlcjBAZXhhbXBsZS5jb20ifQ.kaQtCWWUXddK0d-Qlv6Oay7suoZ-ZNiRNyBnO3gHb-w89WxZPZ3QQ4MtCPVKgxEjivz6ciXhCro5Y-NzsYc31VINMA0mvvHlo1PNLDzveliB_oUWzjWVx9OGWtcX6zA69Z6U6cLfwKpuR52Ej2wEZ57HvS9v9adpMK2koFAu1G8lVuGWovSrEntXo6tGtSQr0qk02cdr0uaZxr1nh3fauTaAzyUpri2mjkG8GbilHmW1_f3BrgR89YWzIiNP_pJb_Z-ih1uEB6vxDg8bDbwZQn0-rrrseYgvLWt3-VouO2yCHvjwA_IY-LCzL6MLaWvtdNAXH-FMrlw_RCCeo46YTw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/ld+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"first_name\" : \"TestUser\",\r\n    \"last_name\" : \"LastNameUser\",\r\n    \"email\" : \"email@test.fr\",\r\n    \"password\" : \"encryptedPassword\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{bilmoUrl}}/users",
+							"host": [
+								"{{bilmoUrl}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MDU0OTI2ODIsImV4cCI6MTcwNTQ5NjI4Miwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoidXNlcjBAZXhhbXBsZS5jb20ifQ.kaQtCWWUXddK0d-Qlv6Oay7suoZ-ZNiRNyBnO3gHb-w89WxZPZ3QQ4MtCPVKgxEjivz6ciXhCro5Y-NzsYc31VINMA0mvvHlo1PNLDzveliB_oUWzjWVx9OGWtcX6zA69Z6U6cLfwKpuR52Ej2wEZ57HvS9v9adpMK2koFAu1G8lVuGWovSrEntXo6tGtSQr0qk02cdr0uaZxr1nh3fauTaAzyUpri2mjkG8GbilHmW1_f3BrgR89YWzIiNP_pJb_Z-ih1uEB6vxDg8bDbwZQn0-rrrseYgvLWt3-VouO2yCHvjwA_IY-LCzL6MLaWvtdNAXH-FMrlw_RCCeo46YTw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{bilmoUrl}}/users/194",
+							"host": [
+								"{{bilmoUrl}}"
+							],
+							"path": [
+								"users",
+								"194"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "bilmoUrl",
+			"value": "http://127.0.0.1:8000/api"
+		}
+	]
+}
