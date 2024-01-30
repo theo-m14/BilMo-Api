@@ -79,6 +79,6 @@ To get started with Bilmo-Api, follow these simple steps:
 
 12. **Api Documentation**
 
-    Check the Api Documentation at [https://drive.google.com/file](https://drive.google.com/file/d/1PwEny3CZpasvWZ2D5vMKfA6SB9ktfl1t/view?usp=sharing)
+    Check the Api Documentation at [https://drive.google.com/file](https://drive.google.com/file/d/16OzLXpSXl3N0ztMrIpEDP-I6OwCZN5_j/view?usp=sharing)
     If u have load default fixtures, default Company log is : user0@example.com / password
     
