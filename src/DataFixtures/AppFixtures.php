@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Company;
+use App\Story\DefaultCompanyStory;
 use App\Story\DefaultProductsStory;
 use App\Story\DefaultUserStory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -13,12 +14,13 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         DefaultProductsStory::load();
-        DefaultUserStory::load();
+        DefaultCompanyStory::load();
         $company = new Company();
         $company->setEmail("user0@example.com");
         $company->setName('Richardson');
         $company->setPassword(password_hash('password', PASSWORD_DEFAULT));
         $manager->persist($company);
         $manager->flush();
+        DefaultUserStory::load();
     }
 }

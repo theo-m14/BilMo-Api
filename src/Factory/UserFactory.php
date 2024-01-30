@@ -42,6 +42,7 @@ final class UserFactory extends ModelFactory
             'first_name' => self::faker()->firstName(),
             'last_name' => self::faker()->lastName(),
             'password' => self::faker()->password(),
+            'company' => CompanyFactory::random(),
         ];
     }
 
