@@ -6,7 +6,7 @@ use App\Entity\User;
 use ApiPlatform\Symfony\Bundle\Test\ApiTestCase;
 
 class UserTest extends ApiTestCase
-{
+{  
     private string $jwtToken;
 
     private array $users;
@@ -42,7 +42,7 @@ class UserTest extends ApiTestCase
         $this->users = $response->toArray()['hydra:member'];
     }
 
-    public function testProductGetOne(): void
+    public function testUserGetOne(): void
     {
         $this->testUserGetAll();
         $first_user = array_shift($this->users);
@@ -57,7 +57,6 @@ class UserTest extends ApiTestCase
             'last_name' => $first_user['last_name'],
             'first_name' => $first_user['first_name'],
             'email' => $first_user['email'],
-            'password' => $first_user['password']
         ]);
     }
 
@@ -78,6 +77,10 @@ class UserTest extends ApiTestCase
     {   
         $this->jwtToken = self::userLoggedIn();
 
+        $this->testUserGetAll(9);
+        $user = array_shift($this->users);
+        $companyId = $user['company']['id'];
+
         $password = password_hash('testpassword', PASSWORD_DEFAULT);
         
         $response = static::createClient()->request('POST', '/api/users', ['json' => [
@@ -95,7 +98,6 @@ class UserTest extends ApiTestCase
             'email' => 'test@email.com',
             'last_name' => 'Clinton',
             'first_name' => 'Margaret',
-            'password' => $password
         ]);
         $this->assertMatchesRegularExpression('~^/api/users/\d+$~', $response->toArray()['@id']);
         $this->assertMatchesResourceItemJsonSchema(User::class);
