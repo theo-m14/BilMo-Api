@@ -9,6 +9,6 @@ final class DefaultUserStory extends Story
 {
     public function build(): void
     {
-        UserFactory::createMany(10);
+        UserFactory::createMany(50);
     }
 }

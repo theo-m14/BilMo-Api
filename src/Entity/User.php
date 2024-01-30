@@ -2,43 +2,69 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Delete;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
+use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
-use ApiPlatform\Metadata\Delete;
-use ApiPlatform\Metadata\Get;
+use App\Controller\GetUserController;
 use ApiPlatform\Metadata\GetCollection;
-use ApiPlatform\Metadata\Post;
+use App\Controller\CreateUserController;
+use App\Controller\DeleteUserController;
+use App\Controller\GetAllUserController;
+use Symfony\Component\Serializer\Attribute\Groups;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ApiResource]
-#[GetCollection]
-#[Get()]
-#[Post()]
-#[Delete()]
+#[GetCollection(
+    normalizationContext: ['groups' => ['user:readAll']],
+    controller:GetAllUserController::class)]
+#[Get(
+    normalizationContext: ['groups' => ['user:readOne','user:readAll']],
+    controller:GetUserController::class,
+    )]
+#[Post(
+    controller: CreateUserController::class,
+    normalizationContext:['groups' => ['user:readAll']],
+     )]
+#[Delete(
+    controller:DeleteUserController::class,
+)]
 class User
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups('user:readAll')]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
     #[NotBlank()]
+    #[Groups('user:readAll')]
     private ?string $first_name = null;
 
     #[ORM\Column(length: 255)]
     #[NotBlank()]
+    #[Groups('user:readAll')]
     private ?string $last_name = null;
 
     #[ORM\Column(length: 255)]
     #[NotBlank()]
+    #[Groups('user:readAll')]
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
     #[NotBlank()]
     private ?string $password = null;
+
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    #[Groups('user:readAll')]
+    #[ApiProperty(genId:false)]
+    private ?Company $company = null;
 
     public function getId(): ?int
     {
@@ -89,6 +115,18 @@ class User
     public function setPassword(string $password): static
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    public function getCompany(): ?Company
+    {
+        return $this->company;
+    }
+
+    public function setCompany(?Company $company): static
+    {
+        $this->company = $company;
 
         return $this;
     }

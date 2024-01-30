@@ -2,8 +2,8 @@
 
 namespace App\Tests;
 
-use ApiPlatform\Symfony\Bundle\Test\ApiTestCase;
 use App\Entity\Product;
+use ApiPlatform\Symfony\Bundle\Test\ApiTestCase;
 
 class ProductTest extends ApiTestCase
 {

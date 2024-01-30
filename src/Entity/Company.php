@@ -2,10 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\CompanyRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use ApiPlatform\Metadata\ApiProperty;
+use ApiPlatform\Metadata\ApiResource;
+use App\Repository\CompanyRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Attribute\Groups;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity(repositoryClass: CompanyRepository::class)]
 class Company implements UserInterface, PasswordAuthenticatedUserInterface
@@ -13,6 +18,7 @@ class Company implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups('user:readAll')]
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
