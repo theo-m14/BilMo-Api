@@ -12,6 +12,9 @@
 			"item": [
 				{
 					"name": "Login_Check",
+					"protocolProfileBehavior": {
+						"followAuthorizationHeader": true
+					},
 					"request": {
 						"method": "POST",
 						"header": [
@@ -37,13 +40,6 @@
 							],
 							"path": [
 								"login_check"
-							],
-							"query": [
-								{
-									"key": "",
-									"value": null,
-									"disabled": true
-								}
 							]
 						}
 					},
@@ -57,16 +53,55 @@
 				{
 					"name": "GetAll",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MDY2MDc4NDQsImV4cCI6MTcwNjYxMTQ0NCwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoidXNlcjBAZXhhbXBsZS5jb20ifQ.MXA5f7a_luSjLRNI9YU4NN5cAZPJ4b9mUrkCnaD9fGBzbQrzQ6OsMYnSoCPSlfhI54kvHXg9X1vXIilj5TnLRxBFx6S_3mJvKyRo_ZkL6O3VB8Hud_0v8HJ8EwSl8d9ZXx9qNbCislW0yHj6x3FqSR7FmXK7fUjRkUzJpmaO75aqbnfMUQOlvtMEhd5_OAMYZBi7MttZuce7fqdWY9qQCpeyG8US3-nWFPd8qY4fejFxGOWoHTiYHw64XIqLA_k1fIhupcYyjf5Cw3Qxsz0Fpw4L3Xr8xQz2Fbq35AFiWTwl8oXw8DcdxE7JKOZ-6S8NPpiR2EdlFF9U_Ic9_3toig",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "{{bilmoUrl}}/products",
+							"host": [
+								"{{bilmoUrl}}"
+							],
+							"path": [
+								"products"
+							]
+						}
 					},
 					"response": []
 				},
 				{
 					"name": "GetOne",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MDY2MDc4NDQsImV4cCI6MTcwNjYxMTQ0NCwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoidXNlcjBAZXhhbXBsZS5jb20ifQ.MXA5f7a_luSjLRNI9YU4NN5cAZPJ4b9mUrkCnaD9fGBzbQrzQ6OsMYnSoCPSlfhI54kvHXg9X1vXIilj5TnLRxBFx6S_3mJvKyRo_ZkL6O3VB8Hud_0v8HJ8EwSl8d9ZXx9qNbCislW0yHj6x3FqSR7FmXK7fUjRkUzJpmaO75aqbnfMUQOlvtMEhd5_OAMYZBi7MttZuce7fqdWY9qQCpeyG8US3-nWFPd8qY4fejFxGOWoHTiYHw64XIqLA_k1fIhupcYyjf5Cw3Qxsz0Fpw4L3Xr8xQz2Fbq35AFiWTwl8oXw8DcdxE7JKOZ-6S8NPpiR2EdlFF9U_Ic9_3toig",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "{{bilmoUrl}}/products/631",
+							"host": [
+								"{{bilmoUrl}}"
+							],
+							"path": [
+								"products",
+								"631"
+							]
+						}
 					},
 					"response": []
 				}
@@ -78,16 +113,55 @@
 				{
 					"name": "GetAll",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MDU0OTI2ODIsImV4cCI6MTcwNTQ5NjI4Miwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoidXNlcjBAZXhhbXBsZS5jb20ifQ.kaQtCWWUXddK0d-Qlv6Oay7suoZ-ZNiRNyBnO3gHb-w89WxZPZ3QQ4MtCPVKgxEjivz6ciXhCro5Y-NzsYc31VINMA0mvvHlo1PNLDzveliB_oUWzjWVx9OGWtcX6zA69Z6U6cLfwKpuR52Ej2wEZ57HvS9v9adpMK2koFAu1G8lVuGWovSrEntXo6tGtSQr0qk02cdr0uaZxr1nh3fauTaAzyUpri2mjkG8GbilHmW1_f3BrgR89YWzIiNP_pJb_Z-ih1uEB6vxDg8bDbwZQn0-rrrseYgvLWt3-VouO2yCHvjwA_IY-LCzL6MLaWvtdNAXH-FMrlw_RCCeo46YTw",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "{{bilmoUrl}}/users",
+							"host": [
+								"{{bilmoUrl}}"
+							],
+							"path": [
+								"users"
+							]
+						}
 					},
 					"response": []
 				},
 				{
 					"name": "GetOne",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MDU0OTI2ODIsImV4cCI6MTcwNTQ5NjI4Miwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoidXNlcjBAZXhhbXBsZS5jb20ifQ.kaQtCWWUXddK0d-Qlv6Oay7suoZ-ZNiRNyBnO3gHb-w89WxZPZ3QQ4MtCPVKgxEjivz6ciXhCro5Y-NzsYc31VINMA0mvvHlo1PNLDzveliB_oUWzjWVx9OGWtcX6zA69Z6U6cLfwKpuR52Ej2wEZ57HvS9v9adpMK2koFAu1G8lVuGWovSrEntXo6tGtSQr0qk02cdr0uaZxr1nh3fauTaAzyUpri2mjkG8GbilHmW1_f3BrgR89YWzIiNP_pJb_Z-ih1uEB6vxDg8bDbwZQn0-rrrseYgvLWt3-VouO2yCHvjwA_IY-LCzL6MLaWvtdNAXH-FMrlw_RCCeo46YTw",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "{{bilmoUrl}}/users/185",
+							"host": [
+								"{{bilmoUrl}}"
+							],
+							"path": [
+								"users",
+								"185"
+							]
+						}
 					},
 					"response": []
 				},
