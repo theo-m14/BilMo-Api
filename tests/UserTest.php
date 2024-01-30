@@ -20,7 +20,7 @@ class UserTest extends ApiTestCase
         return $response->toArray()['token'];
     }
 
-    public function testUserGetAll(int $nbOfUsers = 10): void
+    public function testUserGetAll(): void
     {
         $this->jwtToken = self::userLoggedIn();
 
@@ -31,15 +31,23 @@ class UserTest extends ApiTestCase
         $this->assertJsonContains([
             "@context" => "/api/contexts/User",
             "@id" => "/api/users",
-            "@type" => "hydra:Collection",
-            "hydra:totalItems" => $nbOfUsers
+            "@type" => "hydra:Collection"
         ]);
-
-        $this->assertCount($nbOfUsers, $response->toArray()['hydra:member']);
 
         $this->assertMatchesResourceCollectionJsonSchema(User::class);
 
         $this->users = $response->toArray()['hydra:member'];
+
+        //Verify user ownership by current Company
+        $currentCompanyId = null;
+        foreach ($this->users as $user) {
+            if(!$currentCompanyId){ 
+                $currentCompanyId = $user['company']['id'];
+            }
+            else{
+                $this->assertEquals($currentCompanyId, $user['company']['id']);
+            }
+        }
     }
 
     public function testUserGetOne(): void
@@ -58,6 +66,11 @@ class UserTest extends ApiTestCase
             'first_name' => $first_user['first_name'],
             'email' => $first_user['email'],
         ]);
+
+        $response = static::createClient()->request('GET', '/api/users/' . $this->foundNotOwnedUserId(), ['auth_bearer' => $this->jwtToken]);
+
+        $this->assertResponseStatusCodeSame(404);
+        $this->assertJsonContains(['status' => 404, 'detail' => 'User Not Found']);
     }
 
     public function testDeleteUser(): void
@@ -71,13 +84,18 @@ class UserTest extends ApiTestCase
         $this->assertNull(
             static::getContainer()->get('doctrine')->getRepository(User::class)->findOneBy(['id' => $first_user['id']])
         );
+
+        $response = static::createClient()->request('GET', '/api/users/' . $this->foundNotOwnedUserId(), ['auth_bearer' => $this->jwtToken]);
+
+        $this->assertResponseStatusCodeSame(404);
+        $this->assertJsonContains(['status' => 404, 'detail' => 'User Not Found']);
     }
 
     public function testCreateUser() : void
     {   
         $this->jwtToken = self::userLoggedIn();
 
-        $this->testUserGetAll(9);
+        $this->testUserGetAll();
         $user = array_shift($this->users);
         $companyId = $user['company']['id'];
 
@@ -112,6 +130,23 @@ class UserTest extends ApiTestCase
         $this->assertJsonContains([
             'hydra:title' => 'An error occurred',
         ]);
+    }
+
+    public function foundNotOwnedUserId() : int
+    {
+        $users = $this->users;
+
+        $previousUserId = null;
+
+        foreach($users as $user){
+            $currentUserId = $user['id'];
+            if($previousUserId && $previousUserId + 1 !== $currentUserId){
+                return $previousUserId + 1;
+            }
+            $previousUserId = $currentUserId;
+        }
+
+
     }
     
 }

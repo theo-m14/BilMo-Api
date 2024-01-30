@@ -9,17 +9,30 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
+use App\Controller\GetUserController;
 use ApiPlatform\Metadata\GetCollection;
 use App\Controller\CreateUserController;
+use App\Controller\DeleteUserController;
+use App\Controller\GetAllUserController;
 use Symfony\Component\Serializer\Attribute\Groups;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ApiResource]
-#[GetCollection(normalizationContext: ['groups' => ['user:readAll']])]
-#[Get(normalizationContext: ['groups' => ['user:readOne','user:readAll']])]
-#[Post(controller: CreateUserController::class, normalizationContext:['groups' => ['user:readAll']])]
-#[Delete()]
+#[GetCollection(
+    normalizationContext: ['groups' => ['user:readAll']],
+    controller:GetAllUserController::class)]
+#[Get(
+    normalizationContext: ['groups' => ['user:readOne','user:readAll']],
+    controller:GetUserController::class,
+    )]
+#[Post(
+    controller: CreateUserController::class,
+    normalizationContext:['groups' => ['user:readAll']],
+     )]
+#[Delete(
+    controller:DeleteUserController::class,
+)]
 class User
 {
     #[ORM\Id]
