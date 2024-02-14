@@ -146,7 +146,6 @@ class UserTest extends ApiTestCase
             $previousUserId = $currentUserId;
         }
 
-
     }
     
 }

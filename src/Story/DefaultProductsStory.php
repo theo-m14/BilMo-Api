@@ -9,6 +9,6 @@ final class DefaultProductsStory extends Story
 {
     public function build(): void
     {
-        ProductFactory::createMany(30);
+        ProductFactory::createMany(50);
     }
 }
