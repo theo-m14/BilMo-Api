@@ -13,6 +13,5 @@ class CreateUserController extends AbstractController
     {
         $user->setCompany($this->getUser());
         return $user;
-        
     }
 }

@@ -16,9 +16,10 @@ use App\Controller\DeleteUserController;
 use App\Controller\GetAllUserController;
 use Symfony\Component\Serializer\Attribute\Groups;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[ApiResource]
+#[ApiResource(paginationClientEnabled: true)]
 #[GetCollection(
     normalizationContext: ['groups' => ['user:readAll']],
     controller:GetAllUserController::class)]
@@ -53,6 +54,9 @@ class User
 
     #[ORM\Column(length: 255)]
     #[NotBlank()]
+    #[Assert\Email(
+        message: 'The email {{ value }} is not a valid email.',
+    )]
     #[Groups('user:readAll')]
     private ?string $email = null;
 
